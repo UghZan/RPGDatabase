@@ -15,9 +15,9 @@ namespace RPGDatabase.DomainModel
         Misc
     }
 
-    public class Item
+    public class DomainItem
     {
-        public string ID { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -27,6 +27,8 @@ namespace RPGDatabase.DomainModel
 
         public int Rarity { get; set; }
 
-        public Player Owner { get; set; }
+        public DomainPlayer Owner { get; set; }
+
+        public int OwnerId => Owner.PlayerId;
     }
 }

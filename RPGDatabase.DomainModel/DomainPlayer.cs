@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace RPGDatabase.DomainModel
 {
-    public class Player
+    public class DomainPlayer
     {
-        public int ID { get; set; }
+        public int PlayerId { get; set; }
 
         public string Name { get; set; }
 
