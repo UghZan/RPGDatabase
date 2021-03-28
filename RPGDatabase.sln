@@ -5,7 +5,16 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPGDatabase.DomainModel", "RPGDatabase.DomainModel\RPGDatabase.DomainModel.csproj", "{7D7CBD88-2D5A-469C-A06F-C440AA72AB9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPGDatabase.DataAccess", "RPGDatabase.DataAccess\RPGDatabase.DataAccess.csproj", "{56205CF8-3C28-4CBB-AEC5-49382FAAC178}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPGDatabase.DataAccess", "RPGDatabase.DataAccess\RPGDatabase.DataAccess.csproj", "{56205CF8-3C28-4CBB-AEC5-49382FAAC178}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPGDatabase.BLL", "RPGDatabase.BLL\RPGDatabase.BLL.csproj", "{B83D82BF-815A-456E-8ABA-491C3148AD59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPGDatabase.WEB", "RPGDatabase.WEB\RPGDatabase.WEB.csproj", "{FD1D9BF7-4530-44B5-A493-61F5AB265A6A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7D7CBD88-2D5A-469C-A06F-C440AA72AB9D} = {7D7CBD88-2D5A-469C-A06F-C440AA72AB9D}
+		{B83D82BF-815A-456E-8ABA-491C3148AD59} = {B83D82BF-815A-456E-8ABA-491C3148AD59}
+		{56205CF8-3C28-4CBB-AEC5-49382FAAC178} = {56205CF8-3C28-4CBB-AEC5-49382FAAC178}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +30,14 @@ Global
 		{56205CF8-3C28-4CBB-AEC5-49382FAAC178}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56205CF8-3C28-4CBB-AEC5-49382FAAC178}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56205CF8-3C28-4CBB-AEC5-49382FAAC178}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B83D82BF-815A-456E-8ABA-491C3148AD59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B83D82BF-815A-456E-8ABA-491C3148AD59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B83D82BF-815A-456E-8ABA-491C3148AD59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B83D82BF-815A-456E-8ABA-491C3148AD59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD1D9BF7-4530-44B5-A493-61F5AB265A6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD1D9BF7-4530-44B5-A493-61F5AB265A6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD1D9BF7-4530-44B5-A493-61F5AB265A6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD1D9BF7-4530-44B5-A493-61F5AB265A6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

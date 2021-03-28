@@ -7,7 +7,7 @@ namespace RPGDatabase.DataAccess.Interfaces
 {
     //паттерн unit of work
     //https://metanit.com/sharp/mvc5/23.3.php
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
         IRepository<DAItem> Items {get;}
         IRepository<DAPlayer> Players { get; }

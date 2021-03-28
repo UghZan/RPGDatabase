@@ -29,6 +29,6 @@ namespace RPGDatabase.DomainModel
 
         public DomainPlayer Owner { get; set; }
 
-        public int OwnerId => Owner.PlayerId;
+        public int? OwnerId => Owner.PlayerId;
     }
 }

@@ -21,12 +21,12 @@ namespace RPGDatabase.DataAccess.Implementations
             db.Players.Add(obj);
         }
 
-        public void Delete(int id)
+        /*public void Delete(int id)
         {
             DAPlayer player = db.Players.Find(id);
             if (player != null)
                 db.Players.Remove(player);
-        }
+        }*/
 
         public IEnumerable<DAPlayer> Find(Func<DAPlayer, bool> predicate)
         {

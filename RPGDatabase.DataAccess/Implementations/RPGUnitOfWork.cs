@@ -7,7 +7,7 @@ using System.Text;
 
 namespace RPGDatabase.DataAccess.Implementations
 {
-    class RPGUnitOfWork : IUnitOfWork
+    public class RPGUnitOfWork : IUnitOfWork
     {
         private RPGContext db;
         private ItemRepository _Items;

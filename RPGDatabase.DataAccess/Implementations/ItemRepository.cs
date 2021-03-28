@@ -21,12 +21,12 @@ namespace RPGDatabase.DataAccess.Implementations
             db.Items.Add(obj);
         }
 
-        public void Delete(int id)
+        /*public void Delete(int id)
         {
             DAItem Item = db.Items.Find(id);
             if (Item != null)
                 db.Items.Remove(Item);
-        }
+        }*/
 
         public IEnumerable<DAItem> Find(Func<DAItem, bool> predicate)
         {
