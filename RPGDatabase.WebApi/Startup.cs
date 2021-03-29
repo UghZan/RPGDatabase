@@ -4,12 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RPGDatabase.BLL.DTO;
 using RPGDatabase.BLL.Implementations;
 using RPGDatabase.BLL.Interfaces;
 using RPGDatabase.DataAccess.Context;
-using RPGDatabase.DataAccess.Implementations;
 using RPGDatabase.DataAccess.Interfaces;
+using RPGDatabase.DataAccess.Implementations;
 
 namespace RPGDatabase.WebApi
 {
@@ -31,9 +30,11 @@ namespace RPGDatabase.WebApi
             // BLL
             services.Add(new ServiceDescriptor(typeof(IItemService), typeof(ItemService), ServiceLifetime.Scoped));
             services.Add(new ServiceDescriptor(typeof(IPlayerService), typeof(PlayerService), ServiceLifetime.Scoped));
+            services.Add(new ServiceDescriptor(typeof(IPlayerValidate), typeof(PlayerValidateService), ServiceLifetime.Scoped));
 
             // DataAccess
-            services.Add(new ServiceDescriptor(typeof(IUnitOfWork), typeof(RPGUnitOfWork), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IItemRepository), typeof(ItemRepository), ServiceLifetime.Transient));
+            services.Add(new ServiceDescriptor(typeof(IPlayerRepository), typeof(PlayerRepository), ServiceLifetime.Transient));
 
             // DB Contexts
             services.AddDbContext<RPGContext>(options =>

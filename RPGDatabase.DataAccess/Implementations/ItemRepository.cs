@@ -13,7 +13,7 @@ using RPGDatabase.DataAccess.Entities;
 
 namespace RPGDatabase.DataAccess.Implementations
 {
-    class ItemRepository : IItemRepository
+    public class ItemRepository : IItemRepository
     {
         private IMapper mapper;
         private RPGContext db;

@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RPGDatabase.BLL\RPGDatabase.BLL.csproj" />
+    <ProjectReference Include="..\RPGDatabase.BLL_Tests\RPGDatabase.BLL_Tests.csproj" />
     <ProjectReference Include="..\RPGDatabase.DataAccess\RPGDatabase.DataAccess.csproj" />
     <ProjectReference Include="..\RPGDatabase.DomainModel\RPGDatabase.DomainModel.csproj" />
   </ItemGroup>

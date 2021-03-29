@@ -16,10 +16,10 @@ namespace RPGDatabase.BLL.Implementations
 
         public void ValidatePlayer(IPlayerContainer playerId)
         {
-            if(playerId == null || playerId.PlayerId == null)
+            if(playerId == null)
                 throw new ArgumentNullException(nameof(playerId));
 
-            var res = playerDA.Get(new DomainPlayerIdentityModel((int)playerId.PlayerId));
+            var res = playerDA.Get(new DomainPlayerIdentityModel(playerId));
 
             if (res == null && playerId.PlayerId.HasValue)
                 throw new InvalidOperationException($"No player with id {playerId.PlayerId}");

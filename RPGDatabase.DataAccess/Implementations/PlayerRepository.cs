@@ -13,7 +13,7 @@ using System.Text;
 
 namespace RPGDatabase.DataAccess.Implementations
 {
-    class PlayerRepository : IPlayerRepository
+    public class PlayerRepository : IPlayerRepository
     {
         private IMapper mapper;
         private RPGContext db;

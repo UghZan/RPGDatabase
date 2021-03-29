@@ -11,6 +11,11 @@ namespace RPGDatabase.DomainModel.Models
     {
         public int PlayerId { get; }
 
+        public DomainPlayerIdentityModel(IPlayerContainer container)
+        {
+            PlayerId = container.PlayerId != null ? (int)container.PlayerId : -1;
+        }
+
         public DomainPlayerIdentityModel(int _ID)
         {
             PlayerId = _ID;
