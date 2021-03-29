@@ -4,12 +4,18 @@ using RPGDatabase.DataAccess.Entities;
 
 namespace RPGDatabase.DataAccess.Context
 {
-    class RPGContext : DbContext
+    public class RPGContext : DbContext
     {
         public DbSet<DAItem> Items;
         public DbSet<DAPlayer> Players;
 
         public RPGContext()
+        {
+            Database.EnsureCreated();
+        }
+
+        public RPGContext(DbContextOptions<RPGContext> options)
+            : base(options)
         {
             Database.EnsureCreated();
         }
@@ -22,7 +28,7 @@ namespace RPGDatabase.DataAccess.Context
         {
             modelBuilder.Entity<DAItem>(entity =>
             {
-                entity.Property(e => e.Id).UseIdentityColumn().Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
+                entity.Property(e => e.ID).UseIdentityColumn().Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
 
                 entity.Property(e => e.Name).IsRequired();
                 entity.Property(e => e.Type).IsRequired();

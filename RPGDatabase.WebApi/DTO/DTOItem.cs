@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RPGDatabase.BLL.DTO
+namespace RPGDatabase.WebApi.DTO
 {
     public class DTOItem
     {
@@ -11,6 +11,6 @@ namespace RPGDatabase.BLL.DTO
         public int Type { get; set; }
         public int Price { get; set; }
         public int Rarity { get; set; }
-        public int OwnerID { get; set; }
+        public int? OwnerID { get; set; }
     }
 }

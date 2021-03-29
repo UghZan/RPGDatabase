@@ -1,20 +1,14 @@
-﻿using RPGDatabase.DomainModel.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace RPGDatabase.DomainModel
+namespace RPGDatabase.WebApi.DTO
 {
-    public class DomainPlayer
+    public class DTOPlayer
     {
         public int PlayerId { get; set; }
-
         public string Name { get; set; }
-
         public int Level { get; set; }
-
         public int Money { get; set; }
     }
 }

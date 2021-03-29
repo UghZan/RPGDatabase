@@ -1,48 +1,49 @@
 ﻿using AutoMapper;
-using RPGDatabase.BLL.DTO;
 using RPGDatabase.BLL.Interfaces;
 using RPGDatabase.DataAccess.Entities;
 using RPGDatabase.DataAccess.Interfaces;
+using RPGDatabase.DomainModel;
+using RPGDatabase.DomainModel.Models;
 using System;
 using System.Collections.Generic;
 
 namespace RPGDatabase.BLL.Implementations
 {
-    public class ItemService : IService<DTOItem>
+    public class ItemService : IItemService
     {
-        IUnitOfWork DB { get; set; }
+        IItemRepository itemDB;
+        IPlayerValidate validator;
 
-        public ItemService(IUnitOfWork db)
+        public ItemService(IItemRepository _itemDB, IPlayerValidate _validator)
         {
-            DB = db;
+            itemDB = _itemDB;
+            validator = _validator;
         }
-        public void CreateEntity(DTOItem item)
+        public DomainItem CreateEntity(DomainItemUpdateModel item)
         {
-            DAPlayer owner = DB.Players.Get(item.OwnerID);
+            validator.ValidatePlayer(item);
             if(item == null) throw new ArgumentNullException("Item is null");
-            if (owner == null) throw new NullReferenceException(string.Format("No player with id {0} found", item.OwnerID));
-            DAItem _item = new DAItem { ID = item.ID, Name = item.Name, Owner = owner, OwnerID = item.OwnerID, Price = item.Price, Rarity = item.Rarity, Type = item.Type };
-            DB.Items.Add(_item);
-            DB.Save();
+            return itemDB.Add(item);
         }
 
-        public void Dispose()
-        {
-            DB.Dispose();
-        }
-
-        public DTOItem GetEntity(int? id)
+        public DomainItem GetEntity(DomainItemIdentityModel id)
         {
             if (id == null) throw new ArgumentNullException("ID is null");
-            var item = DB.Items.Get((int)id);
+            var item = itemDB.Get(id);
             if (item == null) throw new NullReferenceException(string.Format("No item with id {0} found", id));
-            return new DTOItem { ID = item.ID, Name = item.Name, OwnerID = item.OwnerID, Rarity = item.Rarity, Price = item.Price, Type = item.Type };
+            return item;
         }
 
-        public IEnumerable<DTOItem> GetEntities()
+        public IEnumerable<DomainItem> GetEntities()
         {
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<DAItem, DTOItem>()).CreateMapper();
-            return mapper.Map<IEnumerable<DAItem>, List<DTOItem>>(DB.Items.GetAll());
+            return itemDB.GetAll();
+        }
+
+        public DomainItem UpdateEntity(DomainItemUpdateModel update)
+        {
+            validator.ValidatePlayer(update);
+            if (update == null) throw new ArgumentNullException("Item is null");
+            return itemDB.Update(update);
         }
     }
 }

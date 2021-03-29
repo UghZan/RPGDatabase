@@ -1,24 +1,31 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RPGDatabase.DataAccess.Context;
-using RPGDatabase.DataAccess.Entities;
+using RPGDatabase.DomainModel;
+using RPGDatabase.DomainModel.Models;
+using RPGDatabase.DomainModel.Contracts;
 using RPGDatabase.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoMapper;
+using RPGDatabase.DataAccess.Entities;
 
 namespace RPGDatabase.DataAccess.Implementations
 {
-    class ItemRepository : IRepository<DAItem>
+    class ItemRepository : IItemRepository
     {
+        private IMapper mapper;
         private RPGContext db;
         public ItemRepository(RPGContext context)
         {
             db = context;
         }
-        public void Add(DAItem obj)
+        public DomainItem Add(DomainItemUpdateModel item)
         {
-            db.Items.Add(obj);
+            var added = db.Items.Add(mapper.Map<DAItem>(item));
+            db.SaveChanges();
+            return mapper.Map<DomainItem>(added.Entity);
         }
 
         /*public void Delete(int id)
@@ -28,24 +35,40 @@ namespace RPGDatabase.DataAccess.Implementations
                 db.Items.Remove(Item);
         }*/
 
-        public IEnumerable<DAItem> Find(Func<DAItem, bool> predicate)
+        public DomainItem Get(DomainItemIdentityModel id)
         {
-            return db.Items.Where(predicate).ToList();
+            return mapper.Map<DomainItem>(GetItem(id.ID));
         }
 
-        public DAItem Get(int id)
+        public DomainItem Get(int? id)
         {
-            return db.Items.Find(id);
+            return mapper.Map<DomainItem>(GetItem(id));
         }
 
-        public IEnumerable<DAItem> GetAll()
+        public IEnumerable<DomainItem> GetAll()
         {
-            return db.Items;
+            return mapper.Map<IEnumerable<DomainItem>>(db.Items.Include(e => e.Owner).ToList());
         }
 
-        public void Update(DAItem obj)
+        public DomainItem Update(DomainItemUpdateModel item)
         {
-            db.Entry(obj).State = EntityState.Modified;
+            var existingItem = GetItem(item.ID);
+
+            var result = mapper.Map(item, existingItem);
+
+            db.Update(result);
+            db.SaveChanges();
+
+            return mapper.Map<DomainItem>(result);
+        }
+
+        private DAItem GetItem(int? item)
+        {
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
+
+            return db.Items.Include(e => e.Owner)
+                .FirstOrDefault(e => e.ID == item);
         }
     }
 }

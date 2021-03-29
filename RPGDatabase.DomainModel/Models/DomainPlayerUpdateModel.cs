@@ -1,14 +1,20 @@
-﻿using System;
+﻿using RPGDatabase.DomainModel.Contracts;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace RPGDatabase.BLL.DTO
+namespace RPGDatabase.DomainModel.Models
 {
-    public class DTOPlayer
+    public class DomainPlayerUpdateModel
     {
         public int PlayerId { get; set; }
+
         public string Name { get; set; }
+
         public int Level { get; set; }
+
         public int Money { get; set; }
     }
 }

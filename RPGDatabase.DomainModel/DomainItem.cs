@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RPGDatabase.DomainModel.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,9 +16,9 @@ namespace RPGDatabase.DomainModel
         Misc
     }
 
-    public class DomainItem
+    public class DomainItem : IItemIdentificator, IPlayerContainer
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         public string Name { get; set; }
 
@@ -29,6 +30,6 @@ namespace RPGDatabase.DomainModel
 
         public DomainPlayer Owner { get; set; }
 
-        public int? OwnerId => Owner.PlayerId;
+        public int? PlayerId => Owner.PlayerId;
     }
 }
