@@ -17,13 +17,14 @@ namespace RPGDatabase.DataAccess.Implementations
     {
         private IMapper mapper;
         private RPGContext db;
-        public ItemRepository(RPGContext context)
+        public ItemRepository(RPGContext context, IMapper _mapper)
         {
             db = context;
+            mapper = _mapper;
         }
         public DomainItem Add(DomainItemUpdateModel item)
         {
-            var added = db.Items.Add(mapper.Map<DAItem>(item));
+            var added = db.Item.Add(mapper.Map<DAItem>(item));
             db.SaveChanges();
             return mapper.Map<DomainItem>(added.Entity);
         }
@@ -47,7 +48,7 @@ namespace RPGDatabase.DataAccess.Implementations
 
         public IEnumerable<DomainItem> GetAll()
         {
-            return mapper.Map<IEnumerable<DomainItem>>(db.Items.Include(e => e.Owner).ToList());
+            return mapper.Map<IEnumerable<DomainItem>>(db.Item.Include(e => e.Player).ToList());
         }
 
         public DomainItem Update(DomainItemUpdateModel item)
@@ -67,7 +68,7 @@ namespace RPGDatabase.DataAccess.Implementations
             if (item == null)
                 throw new ArgumentNullException(nameof(item));
 
-            return db.Items.Include(e => e.Owner)
+            return db.Item.Include(e => e.Player)
                 .FirstOrDefault(e => e.ID == item);
         }
     }

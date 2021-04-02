@@ -10,6 +10,6 @@ namespace RPGDatabase.WebApi.DTO
         public int Type { get; set; }
         public int Price { get; set; }
         public int Rarity { get; set; }
-        public int? OwnerID { get; set; }
+        public int? PlayerId { get; set; }
     }
 }

@@ -16,8 +16,8 @@ namespace RPGDatabase.DataAccess.Entities
 
             public int Rarity { get; set; }
 
-            public virtual DAPlayer Owner { get; set; }
-            public int? OwnerID { get; set; }
+            public virtual DAPlayer Player { get; set; }
+            public int? PlayerId { get; set; }
 
     }
 }

@@ -1,24 +1,26 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RPGDatabase.WebApi.DTO;
-using RPGDatabase.BLL.Implementations;
+using RPGDatabase.BLL.Interfaces;
 using RPGDatabase.DomainModel.Models;
+using RPGDatabase.WebApi.DTO;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RPGDatabase.WebApi.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    class PlayerController : ControllerBase
+    [ApiController]
+    public class PlayerController : ControllerBase
     {
         private ILogger<PlayerController> logger;
-        private PlayerService playerService;
+        private IPlayerService playerService;
         private IMapper mapper;
 
-        public PlayerController(PlayerService _playerService, ILogger<PlayerController> _logger, IMapper _mapper)
+        public PlayerController(IPlayerService _playerService, ILogger<PlayerController> _logger, IMapper _mapper)
         {
             playerService = _playerService;
             logger = _logger;
@@ -27,11 +29,11 @@ namespace RPGDatabase.WebApi.Controllers
 
         [HttpGet]
         [Route("{playerId}")]
-        public DTOPlayer GetPlayer(int id)
+        public DTOPlayer GetPlayer(int playerId)
         {
             logger.LogTrace($"{nameof(this.GetPlayer)} called");
 
-            return mapper.Map<DTOPlayer>(playerService.GetEntity(new DomainPlayerIdentityModel(id)));
+            return mapper.Map<DTOPlayer>(playerService.GetEntity(new DomainPlayerIdentityModel(playerId)));
         }
 
         [HttpGet]
@@ -56,7 +58,7 @@ namespace RPGDatabase.WebApi.Controllers
 
         [HttpPatch]
         [Route("")]
-        public DTOPlayer PatchPlayer(DTOPlayerCreate player)
+        public DTOPlayer PatchPlayer(DTOPlayer player)
         {
             logger.LogTrace($"{nameof(this.PatchPlayer)} called");
 

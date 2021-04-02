@@ -9,16 +9,16 @@ namespace RPGDatabase.DomainModel.Models
 {
     public class DomainPlayerIdentityModel
     {
-        public int PlayerId { get; }
+        public int Id { get; }
 
         public DomainPlayerIdentityModel(IPlayerContainer container)
         {
-            PlayerId = container.PlayerId != null ? (int)container.PlayerId : -1;
+            Id = container.PlayerId != null ? (int)container.PlayerId : -1;
         }
 
         public DomainPlayerIdentityModel(int _ID)
         {
-            PlayerId = _ID;
+            Id = _ID;
         }
     }
 }

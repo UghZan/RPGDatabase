@@ -6,7 +6,7 @@ namespace RPGDatabase.WebApi.DTO
 {
     public class DTOPlayer
     {
-        public int PlayerId { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public int Level { get; set; }
         public int Money { get; set; }

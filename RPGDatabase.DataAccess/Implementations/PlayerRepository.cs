@@ -17,13 +17,14 @@ namespace RPGDatabase.DataAccess.Implementations
     {
         private IMapper mapper;
         private RPGContext db;
-        public PlayerRepository(RPGContext context)
+        public PlayerRepository(RPGContext context, IMapper _mapper)
         {
             db = context;
+            mapper = _mapper;
         }
         public DomainPlayer Add(DomainPlayerUpdateModel item)
         {
-            var added = db.Players.Add(mapper.Map<DAPlayer>(item));
+            var added = db.Player.Add(mapper.Map<DAPlayer>(item));
             db.SaveChanges();
             return mapper.Map<DomainPlayer>(added.Entity);
         }
@@ -37,7 +38,7 @@ namespace RPGDatabase.DataAccess.Implementations
 
         public DomainPlayer Get(DomainPlayerIdentityModel id)
         {
-            return mapper.Map<DomainPlayer>(GetPlayer(id.PlayerId));
+            return mapper.Map<DomainPlayer>(GetPlayer(id.Id));
         }
 
         public DomainPlayer Get(int? id)
@@ -47,12 +48,12 @@ namespace RPGDatabase.DataAccess.Implementations
 
         public IEnumerable<DomainPlayer> GetAll()
         {
-            return mapper.Map<IEnumerable<DomainPlayer>>(db.Players.ToList());
+            return mapper.Map<IEnumerable<DomainPlayer>>(db.Player.ToList());
         }
 
         public DomainPlayer Update(DomainPlayerUpdateModel player)
         {
-            var existingPlayer = GetPlayer(player.PlayerId);
+            var existingPlayer = GetPlayer(player.Id);
 
             var result = mapper.Map(player, existingPlayer);
 
@@ -62,9 +63,12 @@ namespace RPGDatabase.DataAccess.Implementations
             return mapper.Map<DomainPlayer>(result);
         }
 
-        private DomainPlayer GetPlayer(int? playerId)
+        private DAPlayer GetPlayer(int? id)
         {
-            return playerId.HasValue ? mapper.Map<DomainPlayer>(db.Players.FirstOrDefault(e => e.PlayerId == playerId)) : null;
+            if (id == null)
+                throw new ArgumentNullException(nameof(id));
+
+            return db.Player.FirstOrDefault(e => e.ID == id);
         }
     }
 }

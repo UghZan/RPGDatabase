@@ -9,7 +9,7 @@ namespace RPGDatabase.DomainModel.Models
 {
     public class DomainPlayerUpdateModel
     {
-        public int PlayerId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 

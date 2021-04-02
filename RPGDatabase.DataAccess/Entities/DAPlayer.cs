@@ -8,7 +8,7 @@ namespace RPGDatabase.DataAccess.Entities
     public class DAPlayer
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int PlayerId { get; set; }
+        public int ID { get; set; }
 
         public string Name { get; set; }
 

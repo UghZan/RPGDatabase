@@ -9,7 +9,7 @@ namespace RPGDatabase.DomainModel
 {
     public class DomainPlayer
     {
-        public int PlayerId { get; set; }
+        public int ID { get; set; }
 
         public string Name { get; set; }
 

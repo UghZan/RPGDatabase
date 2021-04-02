@@ -1,25 +1,26 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RPGDatabase.WebApi.DTO;
-using RPGDatabase.BLL.Implementations;
 using RPGDatabase.BLL.Interfaces;
 using RPGDatabase.DomainModel.Models;
+using RPGDatabase.WebApi.DTO;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace RPGDatabase.WebApi.Controllers
+namespace RPGDatabase.WebApi
 {
-    [ApiController]
     [Route("api/[controller]")]
-    class ItemController : ControllerBase
+    [ApiController]
+    public class ItemController : ControllerBase
     {
         private ILogger<ItemController> logger;
         private IItemService itemService;
         private IMapper mapper;
 
-        public ItemController(ItemService _itemService, ILogger<ItemController> _logger, IMapper _mapper)
+        public ItemController(IItemService _itemService, ILogger<ItemController> _logger, IMapper _mapper)
         {
             itemService = _itemService;
             logger = _logger;
@@ -28,27 +29,27 @@ namespace RPGDatabase.WebApi.Controllers
 
         [HttpGet]
         [Route("{itemId}")]
-        public DTOItem GetItem(int id)
+        public DTOItem Get(int itemId)
         {
-            logger.LogTrace($"{nameof(this.GetItem)} called");
+            logger.LogTrace($"{nameof(this.Get)} called");
 
-            return mapper.Map<DTOItem>(itemService.GetEntity(new DomainItemIdentityModel(id)));
+            return mapper.Map<DTOItem>(itemService.GetEntity(new DomainItemIdentityModel(itemId)));
         }
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<DTOItem> GetItems()
+        public IEnumerable<DTOItem> Get()
         {
-            logger.LogTrace($"{nameof(this.GetItems)} called");
+            logger.LogTrace($"{nameof(this.Get)} called");
 
             return mapper.Map<IEnumerable<DTOItem>>(itemService.GetEntities());
         }
 
         [HttpPut]
         [Route("")]
-        public DTOItem PutItem(DTOItemCreate item)
+        public DTOItem Put(DTOItemCreate item)
         {
-            logger.LogTrace($"{nameof(this.PutItem)} called");
+            logger.LogTrace($"{nameof(this.Put)} called");
 
             var result = itemService.CreateEntity(mapper.Map<DomainItemUpdateModel>(item));
 
@@ -57,9 +58,9 @@ namespace RPGDatabase.WebApi.Controllers
 
         [HttpPatch]
         [Route("")]
-        public DTOItem PatchItem(DTOItemCreate item)
+        public DTOItem Patch(DTOItem item)
         {
-            logger.LogTrace($"{nameof(this.PatchItem)} called");
+            logger.LogTrace($"{nameof(this.Patch)} called");
 
             var result = itemService.UpdateEntity(mapper.Map<DomainItemUpdateModel>(item));
 

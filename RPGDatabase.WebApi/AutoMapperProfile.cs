@@ -6,9 +6,9 @@ using RPGDatabase.WebApi.DTO;
 
 namespace RPGDatabase.WebApi
 {
-    public class MapperProfile : Profile
+    public class AutoMapperProfile : Profile
     {
-        public MapperProfile()
+        public AutoMapperProfile()
         {
             CreateMap<DAItem, DomainItem>();
             CreateMap<DAPlayer, DomainPlayer>();
@@ -19,11 +19,14 @@ namespace RPGDatabase.WebApi
             CreateMap<DTOItemCreate, DomainItemUpdateModel>();
             CreateMap<DTOPlayerCreate, DomainPlayerUpdateModel>();
 
-            CreateMap<DAItem, DomainItemUpdateModel>();
-            CreateMap<DAPlayer, DomainPlayerUpdateModel>();
+            CreateMap<DTOItem, DomainItemUpdateModel>();
+            CreateMap<DTOPlayer, DomainPlayerUpdateModel>();
 
-            CreateMap<DomainItem, DomainItemUpdateModel>();
-            CreateMap<DomainPlayer, DomainPlayerUpdateModel>();
+            CreateMap<DomainItemUpdateModel, DAItem>();
+            CreateMap<DomainPlayerUpdateModel, DAPlayer>();
+
+            CreateMap<DomainItemUpdateModel, DomainItem>();
+            CreateMap<DomainPlayerUpdateModel, DomainPlayer>();
         }
     }
 }

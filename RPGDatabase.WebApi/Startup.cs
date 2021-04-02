@@ -37,8 +37,7 @@ namespace RPGDatabase.WebApi
             services.Add(new ServiceDescriptor(typeof(IPlayerRepository), typeof(PlayerRepository), ServiceLifetime.Transient));
 
             // DB Contexts
-            services.AddDbContext<RPGContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("Database")));
+            services.AddDbContext<RPGContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

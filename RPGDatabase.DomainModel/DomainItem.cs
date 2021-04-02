@@ -28,8 +28,8 @@ namespace RPGDatabase.DomainModel
 
         public int Rarity { get; set; }
 
-        public DomainPlayer Owner { get; set; }
+        public DomainPlayer Player { get; set; }
 
-        public int? PlayerId => Owner.PlayerId;
+        public int? PlayerId => Player.ID;
     }
 }
