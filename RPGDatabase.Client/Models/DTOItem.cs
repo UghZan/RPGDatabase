@@ -1,10 +1,17 @@
-﻿using RPGDatabase.DomainModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RPGDatabase.WebApi.DTO
+namespace RPGDatabase.Client.Models
 {
+    public enum ItemType
+    {
+        Weapon,
+        Armor,
+        Consumable,
+        QuestItem,
+        Misc
+    }
     public class DTOItem
     {
         public int ID { get; set; }

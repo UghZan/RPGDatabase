@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RPGDatabase.DomainModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RPGDatabase.DataAccess.Entities
@@ -10,7 +11,7 @@ namespace RPGDatabase.DataAccess.Entities
 
             public string Name { get; set; }
 
-            public int Type { get; set; }
+            public ItemType Type { get; set; }
 
             public int Price { get; set; }
 
