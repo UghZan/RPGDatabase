@@ -11,6 +11,6 @@ namespace RPGDatabase.Client.Services
         Task<DTOItem> CreateEntity(DTOItemCreate entity);
         Task<DTOItem> GetEntity(int id);
         Task<IEnumerable<DTOItem>> GetEntities();
-        Task<DTOItem> UpdateEntity(DTOItemCreate update);
+        Task<DTOItem> UpdateEntity(DTOItem update);
     }
 }

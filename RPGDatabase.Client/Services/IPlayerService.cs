@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace RPGDatabase.Client.Services
 {
-    interface IPlayerService
+    public interface IPlayerService
     {
         Task<DTOPlayer> CreateEntity(DTOPlayerCreate entity);
         Task<DTOPlayer> GetEntity(int id);
         Task<IEnumerable<DTOPlayer>> GetEntities();
-        Task<DTOPlayer> UpdateEntity(DTOPlayerCreate update);
+        Task<DTOPlayer> UpdateEntity(DTOPlayer update);
     }
 }

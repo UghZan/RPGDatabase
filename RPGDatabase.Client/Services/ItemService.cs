@@ -18,7 +18,7 @@ namespace RPGDatabase.Client.Services
         {
             var jsonString = JsonSerializer.Serialize(entity);
             var httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
-            using var response = await httpClient.PutAsync("http://localhost:44323/api/item/", httpContent);
+            using var response = await httpClient.PutAsync("https://localhost:44323/api/item/", httpContent);
 
             response.EnsureSuccessStatusCode();
 
@@ -28,23 +28,23 @@ namespace RPGDatabase.Client.Services
 
         public async Task<IEnumerable<DTOItem>> GetEntities()
         {
-            var content = await GetContent("http://localhost:44323/api/item/");
+            var content = await GetContent("https://localhost:44323/api/item/");
 
             return JsonSerializer.Deserialize<IEnumerable<DTOItem>>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
         public async Task<DTOItem> GetEntity(int id)
         {
-            var content = await GetContent("http://localhost:44323/api/item/" + id);
+            var content = await GetContent("https://localhost:44323/api/item/" + id);
 
             return JsonSerializer.Deserialize<DTOItem>(content, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
-        public async Task<DTOItem> UpdateEntity(DTOItemCreate update)
+        public async Task<DTOItem> UpdateEntity(DTOItem update)
         {
             var jsonString = JsonSerializer.Serialize(update);
             var httpContent = new StringContent(jsonString, Encoding.UTF8, "application/json");
-            using var response = await httpClient.PatchAsync("http://localhost:44323/api/item/", httpContent);
+            using var response = await httpClient.PatchAsync("https://localhost:44323/api/item/", httpContent);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();

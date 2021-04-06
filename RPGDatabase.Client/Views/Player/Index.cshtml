@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RPGDatabase.Client.Models.DTOItem>
+﻿@model IEnumerable<RPGDatabase.Client.Models.DTOPlayer>
 
 @{
     ViewData["Title"] = "Player List";
@@ -25,16 +25,10 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Type)
+                @Html.DisplayNameFor(model => model.Level)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rarity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PlayerId)
+                @Html.DisplayNameFor(model => model.Money)
             </th>
             <th></th>
         </tr>
@@ -49,21 +43,14 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Type)
+                @Html.DisplayFor(modelItem => item.Level)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Money)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Rarity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlayerId)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID}) |
+                @Html.ActionLink("Details", "Details", new { id=item.ID })
             </td>
         </tr>
 }
